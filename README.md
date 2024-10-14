@@ -1,171 +1,83 @@
-# 🐝 Bee pong!
-This group project is about creating a website for the mighty Pong contest! 🏓
+# 🐝 Beepong - Multiplayer Pong Game with Real-Time Monitoring
+🚧This was the final group project of Hive Helsinki (42 Network). This project passed evaluation, but still requires polishing, this README introduces 
+the main features that have been planned, implemented... A work in progress ...🚧
+🏓
 
 ![BeePong design vision](BeePong_vision_240615.png)
-[Figma](https://www.figma.com/design/42yVXZOi6yLRxybTmu8lhG/BEE-PONG?node-id=0-1&t=JObdYVC2Pk32AxSm-1)
+[Design in Figma](https://www.figma.com/design/42yVXZOi6yLRxybTmu8lhG/BEE-PONG?node-id=0-1&t=JObdYVC2Pk32AxSm-1)
+
+## Overview
+
+Beepong is a real-time multiplayer Pong game, developed as part of a group project. The goal of the game is to provide an engaging gaming experience for multiple players, complete with AI opponent functionality, tournament logic, and a customizable gaming lobby. The project integrates both **front-end** and **back-end** systems, supported by a robust infrastructure that enables real-time monitoring, logging, and analytics using the **ELK (Elasticsearch, Logstash, Kibana)** stack.
+
+The project is designed to be modular, supporting core game functionality alongside optional features such as advanced logging, AI-based opponents, and real-time game monitoring, ensuring flexibility for future expansions and improvements.
+
+## Collaborators
+- [Diego James](https://github.com/djames9)
+- [Linh](https://github.com/linhtng)
+- [Lionel Clerc](https://github.com/liocle)
+- [Valeria](https://github.com/pixelsnow)
+- [wengcychan](https://github.com/wengcychan)
 
 
-## Ways of working:
-- Commit messages chould be in this format: `issue_number commit_message`, where commit_message follows [Conventional Commits standard](https://www.conventionalcommits.org/en/v1.0.0/)
-- When creating a pull request, mention everyone and assign one person to review
+## Features
 
-## 13.6.2024 meeting
-- Wing: continue front-end
-- Lionel: 
-- Lera: Figma error messages for form
-- Linh: 
-- Diego: Will meet Linh on Tuesday
-
-## Architecture
-### Game
-- id
-- player1
-  - id
-  - score
-- player2
-  - id
-  - score
-- state (PENDING, ONGOING, FINISHED)
-- winner player
-- timestamp(s)
-#### Actions for Game:
-- GET page
-- POST /games/ - Create game
-    - Payload: {player1 id, player2 id}
-- PUT /games/{gameId}/update - Update game
-    - Payload: {player1 score, player2 score}
-- PUT /games/{gameId}/finish - Finish game
-
-### Tournament
-- id
-- quarter1 (link to Game)
-- quarter2
-- quarter3
-- quarter4
-- semi1
-- semi2
-- final
-- name
-- description
-- state (PENDING, ONGOING, FINISHED)
-- num_players (2,4,8)
-- players (links to players)
-- winner player
-- timestamp(s)
-#### Actions for Tournament:
-- GET /tournament - Get all
-- GET /tournament/{id} - Get one
-- POST /tournament - Create
-  - Payload: user id (or maybe none bc we have cookie?)
-  - Returns: created tournament whole object
-- PUT /tournament/{id}/join Join (also starts the tournament when it's full)
-  - Payload: user id (or maybe none bc we have cookie?)
-  - Returns: created tournament id (or whole object?)
-- PUT /tournament/{id}/leave - Leave
-  - Payload: user id
-- Refresh tournament (when one of the games is finished, would probably be done from a websocket function but unsure)
-
-### Player
-- id
-- username
-- alias
-- is_registered
-- is_online ?
-- ? auth info ?
-- current tournament (link to Tournament)
-#### Actions for Player:
-- GET /user - get your profile
-- POST /register - create
-  - Payload: user info
-  - Returns: created user (or just id)
-- POST /login
-- PUT /user/{id}/alias - update alias
-  - Payload: new alias
-  - Returns: updated user (or just id)
-
-
-
-## 8.6.2024 meeting
-First priority:
-- Create board (linh)
-- Create docker setup
-- Create prototype (lera)
-- Create dummy project (database, devops, back, front)
-
-## Features plan C:
-- Web:
-    - YES 1 Major module: Use a Framework as backend
-    - MAYBE 0.5 Minor module: Use a front-end framework or toolkit
-    - YES 0.5 Minor module: Use a database for the backend
-
-- Gameplay and user experience:
-    - MAYBE 1 Major module: Remote players
-    - UNLIKELY 1 Major module: Multiplayers (2 vs. 2)
-
-- User management
-    - MAYBE 1 Auth
-    - MAYBE 1 Remote auth
- 
-- AI algo
-    - MAYBE 1 AI opponent
-
-- Devops
-    - PROBABLY 1 Major module: Infrastructure Setup for Log Management
-    - MAYBE 0.5 Minor monitoring
-    - PROBABLY 1 Major module: Designing the Backend as Microservices
-
-- Accessibility
-    - YES 0.5 Minor module: Expanding Browser Compatibility.
-    - YES 0.5 Minor module: Multiple language supports.
-    - YES 0.5 Accessibility
-
-- Server-Side Pong
-    - MAYBE 1 Major module: Replacing Basic Pong with Server-Side Pong and Implementing an API
-
-YES: 3 backend, database, accessibility
-
-PROBABLY: 1 devops: ELK
-
-MAYBE:
-- 4 Remote + multiplayer + server-side + microservices
-- 2 AI opponent + more devops + bootstrap
-- + 4 Remote auth + remote playing + server-side + 1 DevOps module else than microservices
-
-June 8th plan:
-Web
-- Major module: Use a Framework as backend (1)
-- Minor module: Use a database for the backend (0.5)
-- 
-User Management
-Major module: Implementing a remote authentication (1)
-
-Gameplay and user experience
-- Major module: Remote players (1)
+### Core Features
+- **Multiplayer Pong Game**: Play in real-time against other players or an AI opponent.
+- **Tournament Mode**: Create and join tournaments.
+- **Lobby System**: Manage game lobbies.
+- **AI Opponent**: Play against a AI in single-player mode.
   
-AI-Algo
-- Major module: Introduce an AI Opponent (1)
+### Infrastructure and Monitoring
+- **ELK Stack Integration**: Provides real-time monitoring of game logs, player activity, and system performance.
+  - **Elasticsearch** for indexing and searching logs.
+  - **Logstash** for log processing and aggregation.
+  - **Kibana** for visualizing logs and performance metrics.
+- **PostgreSQL Database**: Backend database supporting persistent player data and game history.
+- **Nginx Server**: Handles front-end requests, ensuring smooth game delivery and hosting static assets.
+
+### Testing
+- **Cypress**: End-to-end testing simulating user interactions and verifying the integrity of the front-end. Currently only in this PR:
+https://github.com/BeePong/42_transcendence/pull/91
+    
   
-Accessibility
-- Minor module: Expanding Browser Compatibility (0.5)
-- Minor module: Multiple language supports (0.5)
-  
-Server-Side Pong
-- Major module: Replacing Basic Pong with Server-Side Pong and Implementing an API (1)
-  
-Dev-op: to be decided (1)
+## System Architecture
 
-Sum: 7.5
+The Beepong architecture is divided into multiple services running within Docker containers:
 
-## Memo
+- **Frontend**: Vanilla javascript-based interface where users interact with the game.
+- **Backend**: Django-based REST API that handles game logic, player management, and real-time communication.
+- **Database**: PostgreSQL database stores persistent game data, user accounts, and match results.
+- **ELK Stack**: Elasticsearch, Logstash, and Kibana work together to provide detailed logging and analytics for real-time monitoring.
 
-### To run psql in a docker container
-docker exec -it *container_id* psql -U *my_user* -d *my_db* --password
+## Getting Started
 
-## Resources
-__Inspiration__
-- [Agile and Documentation in ft_transcendence](https://medium.com/@glukas94/ft-transcendence-semana-1-3b641e683339)
-- [ft_transcendence Project Architecture Overview](https://github.com/trancendering/ft_transcendence/blob/main/ARCHITECTURE.md)
-- [How the Django-Docker-Frontend system can be connected](https://medium.com/@bekojix0660/42-ft-transcendence-0d952c94ea05)
-- [Architecture & database diagram](https://github.com/zwzone/ft_transcendence)
-- [42 API](https://api.intra.42.fr/apidoc) | Documentation to build an application with 42 API. | `Intra` |
-- [PostgreSQL commands and flags](https://hasura.io/blog/top-psql-commands-and-flags-you-need-to-know-postgresql)
+### Prerequisites
+- **Docker** and **Docker Compose**: Ensure you have Docker installed to build and run the services.
+- **Node.js**: For frontend development and testing.
+- **Python 3.x**: For backend development (Django).
+- **PostgreSQL**: As the primary database.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/beepong.git
+   cd beepong
+   ```
+2. Set up the environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+3. Build and start the services:
+   ```bash
+   docker compose up 
+   ```
+### Running Tests
+- Cypress: For end-to-end testing:
+   ```bash
+   docker compose run --rm cypress
+   ```
+## License:
+
+This project is licensed under the MIT License.
