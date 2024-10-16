@@ -1,7 +1,5 @@
 # 🐝 Beepong - Multiplayer Pong Game with Real-Time Monitoring
-🚧This was the final group project of Hive Helsinki (42 Network). This project passed evaluation, but still requires polishing, this README introduces 
-the main features that have been planned, implemented... A work in progress ...🚧
-🏓
+
 
 ![BeePong design vision](BeePong_vision_240615.png)
 [Design in Figma](https://www.figma.com/design/42yVXZOi6yLRxybTmu8lhG/BEE-PONG?node-id=0-1&t=JObdYVC2Pk32AxSm-1)
