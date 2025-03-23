@@ -1,22 +1,41 @@
-# 🐝 Beepong - Multiplayer Pong Game with Real-Time Monitoring
+# 🐝 Beepong – Real-Time Multiplayer Game with System Observability
 
+A 42 School group project combining game development, real-time systems, and DevOps tooling.
+Features real-time gameplay, tournaments, and full-stack observability via the ELK Stack.
 
-![BeePong design vision](BeePong_vision_240615.png)
-[Design in Figma](https://www.figma.com/design/42yVXZOi6yLRxybTmu8lhG/BEE-PONG?node-id=0-1&t=JObdYVC2Pk32AxSm-1)
+![image](https://github.com/user-attachments/assets/495b5417-867f-4f07-bc99-bf950bea4e8d)
+---
 
-## Overview
+## 🧩 Project Overview
+Beepong is a modular multiplayer Pong game with support for:
 
-Beepong is a real-time multiplayer Pong game, developed as part of a group project. The goal of the game is to provide an engaging gaming experience for multiple players, complete with AI opponent functionality, tournament logic, and a customizable gaming lobby. The project integrates both **front-end** and **back-end** systems, supported by a robust infrastructure that enables real-time monitoring, logging, and analytics using the **ELK (Elasticsearch, Logstash, Kibana)** stack.
+- AI opponents
+- Tournament brackets
+- Real-time play over WebSockets
+- Frontend-backend separation
+- Centralized log monitoring
 
-The project is designed to be modular, supporting core game functionality alongside optional features such as advanced logging, AI-based opponents, and real-time game monitoring, ensuring flexibility for future expansions and improvements.
-
+I contributed to parts of the infrastructure and logging systems and helped bring the stack back to life in its final stages.
+---
 ## Collaborators
 - [Diego James](https://github.com/djames9)
 - [Linh](https://github.com/linhtng)
 - [Lionel Clerc](https://github.com/liocle)
 - [Valeria](https://github.com/pixelsnow)
 - [wengcychan](https://github.com/wengcychan)
+---
+## 🔧 Tech Stack
 
+| Area        | Stack/Tool                                   |
+|-------------|-----------------------------------------------|
+| Frontend    | Vanilla JS                                    |
+| Backend     | Django REST Framework, WebSockets             |
+| Database    | PostgreSQL                                    |
+| DevOps      | Docker, Docker Compose                        |
+| Monitoring  | ELK Stack (Elasticsearch, Logstash, Kibana)   |
+| Testing     | Cypress (E2E), Jest, Django tests             |
+
+---
 
 ## Features
 
@@ -34,11 +53,6 @@ The project is designed to be modular, supporting core game functionality alongs
 - **PostgreSQL Database**: Backend database supporting persistent player data and game history.
 - **Nginx Server**: Handles front-end requests, ensuring smooth game delivery and hosting static assets.
 
-### Testing
-- **Cypress**: End-to-end testing simulating user interactions and verifying the integrity of the front-end. Currently only in this PR:
-https://github.com/BeePong/42_transcendence/pull/91
-    
-  
 ## System Architecture
 
 The Beepong architecture is divided into multiple services running within Docker containers:
@@ -48,8 +62,19 @@ The Beepong architecture is divided into multiple services running within Docker
 - **Database**: PostgreSQL database stores persistent game data, user accounts, and match results.
 - **ELK Stack**: Elasticsearch, Logstash, and Kibana work together to provide detailed logging and analytics for real-time monitoring.
 
-## Getting Started
+ --- 
+### 🔍 System Observability
 
+Real-time monitoring using the ELK Stack:
+
+- View **log levels over time** (INFO, DEBUG, FATAL)  
+- Visualize **authentication success/failure rates**  
+- Monitor **backend service behavior and events**  
+
+Example Dashboard snapshots:  
+![image](https://github.com/user-attachments/assets/f975ad18-e314-4603-93a2-26b5fa422402)
+
+---
 ### Prerequisites
 - **Docker** and **Docker Compose**: Ensure you have Docker installed to build and run the services.
 - **Node.js**: For frontend development and testing.
@@ -60,7 +85,7 @@ The Beepong architecture is divided into multiple services running within Docker
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/beepong.git
+   git clone git@github.com:liocle/42_transcendence.git
    cd beepong
    ```
 2. Set up the environment variables:
@@ -69,13 +94,9 @@ The Beepong architecture is divided into multiple services running within Docker
    ```
 3. Build and start the services:
    ```bash
-   docker compose up 
+   docker compose up_all 
    ```
-### Running Tests
-- Cypress: For end-to-end testing:
-   ```bash
-   docker compose run --rm cypress
-   ```
+
 ## License:
 
 This project is licensed under the MIT License.
