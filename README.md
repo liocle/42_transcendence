@@ -98,19 +98,10 @@ My part of this project involved integrating the **ELK stack**:
 
 ## Installation
 
-### Prerequisites
-
-- [Docker](https://www.docker.com/) and Docker Compose  
-- Node.js (for Cypress testing)  
-- Python 3.x + pip (for Django)  
-- PostgreSQL (optional locally)
-
-### Run the Project
-
 ```bash
 git clone git@github.com:liocle/42_transcendence.git
 cd beepong
-cp .env.example .env
+cp .env.example .env # Edit the required templated fields
 make up_all
 ```
 
